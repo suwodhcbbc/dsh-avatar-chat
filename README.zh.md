@@ -6,6 +6,14 @@
 
 这是一个 DSH Web 客户端插件：一个 Cordis bundle，注册一个 `settings.section` 席位，并用一张页面级样式表装饰对话记录。
 
+## 快速开始
+
+```sh
+dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
+```
+
+装完重启 DeepSeek Harness。也可以在应用里装：**设置 → 插件市场 → 添加插件**，填同一个 spec。细节见[安装](#安装)。
+
 ## 截图
 
 对话记录 —— 请求气泡右侧是用户头像，回复气泡左侧是助手头像，均为 50 像素：
@@ -34,44 +42,36 @@
 
 ## 安装
 
-profile 级插件以 **bundle** 形式加入 profile。profile 自己的 `cordis.patch.yml` 是**按 id 定位**的：只能覆盖或禁用 bundle 层已声明的条目，往里加一行没有任何效果。
+profile 级插件以 **bundle** 形式加入 profile：包的 `package.json` 声明 `dsh.bundle.patch`，profile 再把包名列进 `dsh.profile.bundles`。profile 自己的 `cordis.patch.yml` 是**按 id 定位**的 —— 只能覆盖或禁用 bundle 层已声明的条目 —— 所以往里加一行装不上任何东西。
 
-### 手工安装（已验证）
+### 在应用里安装
 
-适用于桌面版：它的 profile 由应用独占管理，无法通过 `dsh` CLI 修改。
+**设置 → 插件市场 → 添加插件**，粘贴 spec 并安装，然后重启：
 
-1. 把本仓库按包名复制进 profile 的 `node_modules`：
+```
+github:suwodhcbbc/dsh-avatar-chat
+```
 
-   ```
-   <profile>/node_modules/dsh-avatar-chat/
-   ```
+### 用命令行安装
 
-   `<profile>` 例如 `~/.dsh/profiles/desktop`。需要 `package.json`、`cordis.patch.yml` 与 `lib/`。
-
-2. 在 profile 的 `package.json` 里把包名加进 `dsh.profile.bundles`：
-
-   ```json
-   "dsh": {
-     "profile": {
-       "bundles": [
-         "…",
-         "dsh-avatar-chat"
-       ]
-     }
-   }
-   ```
-
-   列在这里才会被装配进配置树；**不需要**同时出现在 `dependencies` 里。
-
-3. 重启应用。bundle 栈在启动时重新装配。
-
-### 其他 profile
-
-对于 `dsh` CLI 有权管理的 profile：
+先完全退出应用：应用运行期间 `desktop` profile 是锁住的。
 
 ```sh
-dsh plugin --profile <profile> add link:<本仓库的绝对路径>
+dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ```
+
+`dsh plugin` 把这一行剩下的参数转发给 profile 目录里的 pnpm，所以 pnpm 接受的 spec 都能用 —— `github:<owner>/<repo>`、git URL、绝对路径（裸写或 `link:`/`file:`）、`.tgz` 地址，或 registry 包名。它会做两件事，没有第三步：
+
+1. pnpm 把依赖装进 profile。
+2. 因为包里声明了 `dsh.bundle.patch`，profile 的 `dsh.profile.bundles` 会自动加上这个包名。
+
+profile 名写你实际在用的：桌面版是 `desktop`，`dsh web` 是 `web`。装完重启 —— bundle 栈在启动时装配。
+
+从 git 安装会执行包的 `prepare` 脚本，pnpm 默认拦截，需要把提示里的 key 填进 `allowBuilds` 才放行。本包没有任何 scripts，所以没有需要放行的东西。
+
+### 手工安装
+
+pnpm 跑不了时，同一件事可以手工做：把 `package.json`、`cordis.patch.yml` 与 `lib/` 复制进 `<profile>/node_modules/dsh-avatar-chat/`（`<profile>` 例如 `~/.dsh/profiles/desktop`），把 `"dsh-avatar-chat"` 加进 profile 的 `dsh.profile.bundles`，然后重启。列进 `bundles` 才会被装配进配置树；**不需要**同时出现在 `dependencies` 里。
 
 ### 验证
 

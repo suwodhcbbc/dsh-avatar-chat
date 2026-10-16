@@ -6,6 +6,14 @@ Dual avatars for the DeepSeek Harness chat transcript — a user avatar on the r
 
 A DSH Web Client plugin: a Cordis bundle that registers one `settings.section` seat and decorates the transcript with a page-level stylesheet.
 
+## Quick start
+
+```sh
+dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
+```
+
+Then restart DeepSeek Harness. From the app instead: **Settings → Plugins → Add plugin**, same spec. Details in [Install](#install).
+
 ## Screenshots
 
 Transcript — the user's picture beside the request on the right, the assistant's beside the reply on the left, both at 50 px:
@@ -34,44 +42,36 @@ Both come from the author's own desktop build (Chinese locale, custom wallpaper)
 
 ## Install
 
-A profile-local plugin joins a profile as a **bundle**. The profile's own `cordis.patch.yml` is *id-targeted* — it can only override or disable entries that a bundle layer already declared — so adding a row there does nothing.
+A profile-local plugin joins a profile as a **bundle**: its `package.json` declares `dsh.bundle.patch`, and the profile lists the package name in `dsh.profile.bundles`. The profile's own `cordis.patch.yml` is *id-targeted* — it can only override or disable an entry a bundle layer already declared — so adding a row there installs nothing.
 
-### Manual install (verified)
+### From the app
 
-Works for the desktop app, whose profile is managed exclusively by the application and therefore cannot be edited through the `dsh` CLI.
+**Settings → Plugins → Add plugin**, paste the spec, install, then restart:
 
-1. Copy this repository into the profile's `node_modules` under the package name:
+```
+github:suwodhcbbc/dsh-avatar-chat
+```
 
-   ```
-   <profile>/node_modules/dsh-avatar-chat/
-   ```
+### From the CLI
 
-   `<profile>` is e.g. `~/.dsh/profiles/desktop`. Ship `package.json`, `cordis.patch.yml` and `lib/`.
-
-2. Add the package name to the profile's `package.json` under `dsh.profile.bundles`:
-
-   ```json
-   "dsh": {
-     "profile": {
-       "bundles": [
-         "…",
-         "dsh-avatar-chat"
-       ]
-     }
-   }
-   ```
-
-   Being listed here is what composes the plugin into the tree; it does not also have to appear in `dependencies`.
-
-3. Restart the application. The bundle stack is recomposed at boot.
-
-### Other profiles
-
-For a profile the `dsh` CLI is allowed to manage:
+Quit the app first: the `desktop` profile is locked while the application runs.
 
 ```sh
-dsh plugin --profile <profile> add link:<absolute path to this repository>
+dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ```
+
+`dsh plugin` forwards the rest of the line to pnpm inside the profile directory, so every spec pnpm accepts works here — `github:<owner>/<repo>`, a git URL, an absolute path (bare or `link:`/`file:`), a `.tgz` URL, or a registry name. Two things happen and there is no third step:
+
+1. pnpm installs the dependency into the profile.
+2. Because the package declares `dsh.bundle.patch`, the profile's `dsh.profile.bundles` gains its name automatically.
+
+Name the profile you actually run: `desktop` for the desktop application, `web` for `dsh web`. Restart afterwards — the bundle stack is composed at boot.
+
+A git-hosted install runs the package's `prepare` script, which pnpm blocks until the exact key it prints is allowed under `allowBuilds`. This package declares no scripts at all, so there is nothing to allow.
+
+### Manual install
+
+When pnpm cannot run, the same two facts can be applied by hand: copy `package.json`, `cordis.patch.yml` and `lib/` into `<profile>/node_modules/dsh-avatar-chat/` (for example `~/.dsh/profiles/desktop`), add `"dsh-avatar-chat"` to the profile's `dsh.profile.bundles`, and restart. Being listed in `bundles` is what composes the plugin into the tree; it does not also have to appear in `dependencies`.
 
 ### Verify
 
