@@ -12,7 +12,7 @@ A DSH Web Client plugin: a Cordis bundle that registers one `settings.section` s
 dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ```
 
-Then restart DeepSeek Harness. From the app instead: **Settings → Plugins → Add plugin**, same spec. Details in [Install](#install).
+Then restart DeepSeek Harness. From the app instead: **Plugins → Add plugin** in the sidebar, same spec. Details in [Install](#install).
 
 ## Screenshots
 
@@ -46,7 +46,7 @@ A profile-local plugin joins a profile as a **bundle**: its `package.json` decla
 
 ### From the app
 
-**Settings → Plugins → Add plugin**, paste the spec, install, then restart:
+In the sidebar, **Plugins → Add plugin**. Paste the spec, install, then restart:
 
 ```
 github:suwodhcbbc/dsh-avatar-chat

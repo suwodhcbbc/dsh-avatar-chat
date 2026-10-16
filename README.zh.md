@@ -12,7 +12,7 @@
 dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ```
 
-装完重启 DeepSeek Harness。也可以在应用里装：**设置 → 插件市场 → 添加插件**，填同一个 spec。细节见[安装](#安装)。
+装完重启 DeepSeek Harness。也可以在应用里装：侧栏 **插件 → 添加插件**，填同一个 spec。细节见[安装](#安装)。
 
 ## 截图
 
@@ -46,7 +46,7 @@ profile 级插件以 **bundle** 形式加入 profile：包的 `package.json` 声
 
 ### 在应用里安装
 
-**设置 → 插件市场 → 添加插件**，粘贴 spec 并安装，然后重启：
+在侧栏打开 **插件 → 添加插件**，粘贴 spec 并安装，然后重启：
 
 ```
 github:suwodhcbbc/dsh-avatar-chat
