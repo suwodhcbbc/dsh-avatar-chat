@@ -6,6 +6,18 @@ Dual avatars for the DeepSeek Harness chat transcript — a user avatar on the r
 
 A DSH Web Client plugin: a Cordis bundle that registers one `settings.section` seat and decorates the transcript with a page-level stylesheet.
 
+## Screenshots
+
+Transcript — the user avatar on the right and the assistant avatar on the left, at 36 px with no picture set:
+
+![Avatars in the chat transcript](docs/transcript.png)
+
+Settings — the **Avatars** page this plugin adds:
+
+![The Avatars settings page](docs/settings.png)
+
+Both were captured from a synthetic recorded session that ships with the DeepSeek Harness test suite, not from anyone's real conversation.
+
 ## Features
 
 - **Two independent avatars.** The user side and the assistant side each have their own visibility toggle, their own picture, and their own restore-to-default.
