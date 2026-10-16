@@ -8,11 +8,19 @@
 
 ## 快速开始
 
+三种装法，由易到难。**插件市场** —— 打开 **插件 → 更多 → 实验性插件 → 自定义插件市场**，在 **Discover** 里添加下面的索引源，然后点卡片安装：
+
+```
+https://raw.githubusercontent.com/suwodhcbbc/dsh-avatar-chat/main/index.json
+```
+
+**一条命令** —— 先完全退出应用，然后：
+
 ```sh
 dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ```
 
-装完重启 DeepSeek Harness。也可以在应用里装：侧栏 **插件 → 添加插件**，填同一个 spec。细节见[安装](#安装)。
+**在应用里** —— 侧栏 **插件 → 添加插件**，填同一个 spec。两种方式装完都要重启 DeepSeek Harness。细节见[安装](#安装)。
 
 ## 截图
 
@@ -43,6 +51,16 @@ dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ## 安装
 
 profile 级插件以 **bundle** 形式加入 profile：包的 `package.json` 声明 `dsh.bundle.patch`，profile 再把包名列进 `dsh.profile.bundles`。profile 自己的 `cordis.patch.yml` 是**按 id 定位**的 —— 只能覆盖或禁用 bundle 层已声明的条目 —— 所以往里加一行装不上任何东西。
+
+### 从插件市场安装
+
+DSH 自带自定义插件市场。打开 **插件 → 更多 → 实验性插件 → 自定义插件市场**，再到 **插件 → Discover**，添加下面这个索引源，插件就会以卡片形式出现，点一下即可安装：
+
+```
+https://raw.githubusercontent.com/suwodhcbbc/dsh-avatar-chat/main/index.json
+```
+
+索引里钉死了一个确切的 commit，所以从卡片安装是可复现的，而不是「今天 main 是什么就装什么」。随时可以关闭该索引源；已装的插件不受影响。
 
 ### 在应用里安装
 

@@ -8,11 +8,19 @@ A DSH Web Client plugin: a Cordis bundle that registers one `settings.section` s
 
 ## Quick start
 
+Three ways in, easiest first. **Plugin market** — switch on **Plugins → More → Experimental plugins → Custom plugin markets**, add this source under **Discover**, and install the card:
+
+```
+https://raw.githubusercontent.com/suwodhcbbc/dsh-avatar-chat/main/index.json
+```
+
+**One command** — quit the app first, then:
+
 ```sh
 dsh plugin --profile desktop add github:suwodhcbbc/dsh-avatar-chat
 ```
 
-Then restart DeepSeek Harness. From the app instead: **Plugins → Add plugin** in the sidebar, same spec. Details in [Install](#install).
+**From the app** — **Plugins → Add plugin** in the sidebar, same spec. Restart DeepSeek Harness either way. Details in [Install](#install).
 
 ## Screenshots
 
@@ -43,6 +51,16 @@ Both come from the author's own desktop build (Chinese locale, custom wallpaper)
 ## Install
 
 A profile-local plugin joins a profile as a **bundle**: its `package.json` declares `dsh.bundle.patch`, and the profile lists the package name in `dsh.profile.bundles`. The profile's own `cordis.patch.yml` is *id-targeted* — it can only override or disable an entry a bundle layer already declared — so adding a row there installs nothing.
+
+### From the plugin market
+
+DSH ships a custom plugin market. Switch it on — **Plugins → More → Experimental plugins → Custom plugin markets**, then **Plugins → Discover** — add this index source, and the plugin appears as a card you install with one click:
+
+```
+https://raw.githubusercontent.com/suwodhcbbc/dsh-avatar-chat/main/index.json
+```
+
+The index pins one exact commit, so a card install is reproducible rather than "whatever `main` is today". Switch the source back off at any time; the plugin stays installed.
 
 ### From the app
 

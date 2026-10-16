@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "title": {
+    "en": "dsh-avatar-chat",
+    "zh": "头像对话"
+  },
+  "description": {
+    "en": "A single-plugin market index for dsh-avatar-chat.",
+    "zh": "dsh-avatar-chat 的单插件市场索引。"
+  },
+  "metadata": {
+    "categories": {},
+    "labels": {},
+    "sortKeys": {}
+  },
+  "plugins": [
+    {
+      "name": "dsh-avatar-chat",
+      "title": {
+        "en": "Avatar Chat",
+        "zh": "头像对话"
+      },
+      "description": {
+        "en": "User and assistant avatars beside chat bubbles, with a Settings page for each side's picture, visibility, and size.",
+        "zh": "在对话气泡旁显示用户与助手头像，并在设置页里分别控制两侧的图片、显示与尺寸。"
+      },
+      "author": "suwodhcbbc",
+      "homepage": "https://github.com/suwodhcbbc/dsh-avatar-chat#readme",
+      "repository": {
+        "url": "https://github.com/suwodhcbbc/dsh-avatar-chat"
+      },
+      "metadata": {
+        "keywords": [
+          "avatar",
+          "chat",
+          "ui"
+        ],
+        "labels": [],
+        "sortKeys": {}
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "publishTimestamp": 1760572800,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/suwodhcbbc/dsh-avatar-chat",
+            "commit": "3dcce88147e0e411b6b7c8fc4998b4724b7e2260"
+          },
+          "engines": {
+            "dsh": "*"
+          }
+        }
+      ]
+    }
+  ]
+}
