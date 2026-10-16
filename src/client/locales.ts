@@ -1,0 +1,69 @@
+/** Avatar Chat copy: the settings page and the navigation entry that opens it. */
+
+import type {} from '@deepseek-ai/dsh-client-ui-slots'
+
+declare module '@deepseek-ai/dsh-client-ui-slots' {
+  interface LocaleNamespaceMap {
+    /** Avatar Chat settings page and navigation entry copy. */
+    avatarChat: keyof typeof zh
+  }
+}
+
+/** Every copy key this namespace owns. */
+export type AvatarChatLocaleKey = keyof typeof zh
+
+/** Chinese copy; the key authority for this namespace. */
+export const zh = {
+  nav: '头像对话',
+  title: '头像对话',
+  intro: '在对话气泡旁显示用户与助手头像。头像与尺寸只保存在本机浏览器中，不会写入会话记录。',
+  'size-label': '头像尺寸',
+  'size-value': '{size} 像素',
+  'user-title': '用户头像',
+  'assistant-title': '助手头像',
+  'side-visible': '在对话中显示',
+  'toggle-label': '{side}：在对话中显示',
+  'url-label-full': '{side}：图片地址',
+  'side-builtin': '当前使用默认头像',
+  'side-custom': '当前使用自定义图片',
+  choose: '选择图片',
+  replace: '更换图片',
+  reset: '恢复默认',
+  'url-label': '图片地址',
+  'url-placeholder': 'https://example.com/avatar.png',
+  'url-apply': '使用该地址',
+  'failure-type': '仅支持 PNG、JPEG、WebP 或 GIF 图片。',
+  'failure-size': '图片过大，请选择 5 MiB 以内的图片。',
+  'failure-read': '无法读取该图片，请重新选择。',
+  'failure-unsupported': '该文件不是可用的图片。',
+  'storage-unavailable': '此浏览器禁止本机存储，头像设置无法保存。',
+  'save-failed': '头像设置未能保存到本机存储。',
+}
+
+/** English copy, keyed by the Chinese dictionary. */
+export const en: Record<keyof typeof zh, string> = {
+  nav: 'Avatars',
+  title: 'Avatars',
+  intro: 'Show a user and an assistant avatar beside chat bubbles. Both the pictures and the size stay in this browser and are never written to the session.',
+  'size-label': 'Avatar size',
+  'size-value': '{size} px',
+  'user-title': 'Your avatar',
+  'assistant-title': 'Assistant avatar',
+  'side-visible': 'Show in the transcript',
+  'toggle-label': '{side}: show in transcript',
+  'url-label-full': '{side}: picture address',
+  'side-builtin': 'Using the built-in avatar',
+  'side-custom': 'Using a custom picture',
+  choose: 'Choose a picture',
+  replace: 'Replace picture',
+  reset: 'Restore default',
+  'url-label': 'Picture address',
+  'url-placeholder': 'https://example.com/avatar.png',
+  'url-apply': 'Use this address',
+  'failure-type': 'Only PNG, JPEG, WebP, and GIF pictures are accepted.',
+  'failure-size': 'That picture is too large. Choose one under 5 MiB.',
+  'failure-read': 'That picture could not be read. Try choosing it again.',
+  'failure-unsupported': 'That file is not a usable picture.',
+  'storage-unavailable': 'This browser blocks local storage, so avatar settings cannot be saved.',
+  'save-failed': 'Avatar settings could not be saved to local storage.',
+}

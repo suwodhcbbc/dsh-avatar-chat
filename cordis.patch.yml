@@ -1,0 +1,10 @@
+# Bundle patch for dsh-avatar-chat: inserts this package's own row over the profile
+# root. A profile-local plugin joins a profile as a bundle (`dsh.bundle.patch` plus
+# an entry in the profile's `dsh.profile.bundles`), not as a row in the profile's
+# own `cordis.patch.yml`, which is id-targeted at entries the bundle layers already
+# declare.
+
+- insert:
+    - id: ui-avatar-chat
+      name: dsh-avatar-chat
+      config: {}

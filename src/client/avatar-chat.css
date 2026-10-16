@@ -1,0 +1,88 @@
+/*
+ * Avatar Chat — the page-level avatar decoration for transcript rows.
+ *
+ * The transcript declares no slot inside a message row, and every host class
+ * name is a CSS-Modules hash, so this sheet is keyed entirely off the stable
+ * data attributes the chat flow already emits: each row carries
+ * `data-chat-flow-kind` (its ChatNode kind), and the plugin writes its own
+ * flags and picture variables onto the document root.
+ *
+ * The picture is painted in padding the sheet reserves for it rather than by
+ * changing the row to a flex container, so the host's own row geometry, gap
+ * rhythm, and overflow behaviour stay exactly as shipped. Removing the root
+ * attribute removes every one of these rules' effects.
+ *
+ * The custom properties below are declared on the body element, not on the
+ * document root: the theme declares its own alias tokens on `body`, so a
+ * value that substitutes `var(--dsw-…)` must be computed there or it becomes
+ * invalid at computed-value time and silently resolves to nothing.
+ */
+
+html[data-dsh-avatar-chat] body {
+  --dsh-avatar-chat-gap: 10px;
+  --dsh-avatar-chat-line-offset: 2px;
+  /* Built-in user avatar: a neutral disc carrying a person silhouette. */
+  --dsh-avatar-chat-user-default:
+    radial-gradient(circle at 50% 36%, var(--dsw-alias-label-secondary) 0 21%, transparent 22%),
+    radial-gradient(ellipse 34% 26% at 50% 86%, var(--dsw-alias-label-secondary) 0 99%, transparent 100%),
+    linear-gradient(var(--dsw-alias-bg-layer-2), var(--dsw-alias-bg-layer-2));
+  /* Built-in assistant avatar: a brand-coloured ring with a solid core. */
+  --dsh-avatar-chat-assistant-default:
+    radial-gradient(circle at 50% 50%, var(--dsw-alias-brand-primary) 0 16%, transparent 17%),
+    radial-gradient(circle at 50% 50%, transparent 0 33%, var(--dsw-alias-brand-primary) 34% 46%, transparent 47%),
+    linear-gradient(var(--dsw-alias-bg-layer-1), var(--dsw-alias-bg-layer-1));
+  --dsh-avatar-chat-user-art: var(--dsh-avatar-chat-user-default);
+  --dsh-avatar-chat-assistant-art: var(--dsh-avatar-chat-assistant-default);
+}
+
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-user-image] body {
+  --dsh-avatar-chat-user-art: var(--dsh-avatar-chat-user-image);
+}
+
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-assistant-image] body {
+  --dsh-avatar-chat-assistant-art: var(--dsh-avatar-chat-assistant-image);
+}
+
+/* Reserved space: one avatar edge plus the gap to the message body. */
+html[data-dsh-avatar-chat-user='on'] [data-chat-flow-kind='user']:not(:has(> [data-slot='conversation.chat.node']:empty)),
+html[data-dsh-avatar-chat-user='on'] [data-chat-flow-kind='steering']:not(:has(> [data-slot='conversation.chat.node']:empty)) {
+  position: relative;
+  padding-right: calc(var(--dsh-avatar-chat-size, 28px) + var(--dsh-avatar-chat-gap));
+}
+
+html[data-dsh-avatar-chat-assistant='on'] [data-chat-flow-kind='assistant-step']:not([data-chat-group-part='reasoning']):not(:has(> [data-slot='conversation.chat.node']:empty)) {
+  position: relative;
+  padding-left: calc(var(--dsh-avatar-chat-size, 28px) + var(--dsh-avatar-chat-gap));
+}
+
+/* The avatar itself: a disc drawn in the reserved space, top-aligned with the
+   first line of the message. The geometry is repeated under each side flag
+   rather than declared once: with the flag off there is neither reserved space
+   nor a positioning context, so an ungated disc would be laid out at the row's
+   static position instead of disappearing. */
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-user='on'] [data-chat-flow-kind='user']::before,
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-user='on'] [data-chat-flow-kind='steering']::before,
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-assistant='on'] [data-chat-flow-kind='assistant-step']:not([data-chat-group-part='reasoning'])::before {
+  content: '';
+  position: absolute;
+  top: var(--dsh-avatar-chat-line-offset);
+  width: var(--dsh-avatar-chat-size, 28px);
+  height: var(--dsh-avatar-chat-size, 28px);
+  border-radius: 50%;
+  corner-shape: round;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 0 0 0.5px var(--dsw-alias-border-l1);
+}
+
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-user='on'] [data-chat-flow-kind='user']::before,
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-user='on'] [data-chat-flow-kind='steering']::before {
+  right: 0;
+  background-image: var(--dsh-avatar-chat-user-art);
+}
+
+html[data-dsh-avatar-chat][data-dsh-avatar-chat-assistant='on'] [data-chat-flow-kind='assistant-step']:not([data-chat-group-part='reasoning'])::before {
+  left: 0;
+  background-image: var(--dsh-avatar-chat-assistant-art);
+}

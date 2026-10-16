@@ -1,0 +1,156 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heading {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+}
+
+.intro {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.notice {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--dsw-radius-sm);
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-secondary);
+  font-size: 13px;
+}
+
+.warning {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--dsw-radius-sm);
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-state-warn-primary);
+  font-size: 13px;
+}
+
+.sides {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 0.5px solid var(--dsw-alias-border-l1);
+  border-radius: var(--dsw-radius-md);
+  background: var(--dsw-alias-bg-layer-1);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* The preview is the transcript's own disc, so it reads the same variables the
+   page-level sheet paints from — a custom picture shows here the moment it is
+   applied, without a second preview pathway. */
+.preview {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  corner-shape: round;
+  background-color: var(--dsw-alias-bg-layer-2);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 0 0 0.5px var(--dsw-alias-border-l1);
+}
+
+.preview[data-side='user'] {
+  background-image: var(--dsh-avatar-chat-user-art, none);
+}
+
+.preview[data-side='assistant'] {
+  background-image: var(--dsh-avatar-chat-assistant-art, none);
+}
+
+.cardTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.urlRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.urlLabel {
+  flex: none;
+  font-size: 13px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.urlInput {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 28px;
+  padding: 0 10px;
+  border: 0.5px solid var(--dsw-alias-border-l1);
+  border-radius: var(--dsw-radius-sm);
+  background: var(--dsw-alias-bg-base);
+  color: var(--dsw-alias-label-primary);
+  font-size: 13px;
+}
+
+.urlInput::placeholder {
+  color: var(--dsw-alias-label-caption);
+}
+
+.urlInput:focus-visible {
+  border-color: var(--dsw-alias-brand-primary);
+}
+
+.sizeRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sizeLabel {
+  flex: none;
+  font-size: 13px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.range {
+  flex: 1 1 auto;
+  min-width: 0;
+  accent-color: var(--dsw-alias-brand-primary);
+}
+
+.sizeValue {
+  flex: none;
+  min-width: 64px;
+  text-align: right;
+  font-size: 13px;
+  color: var(--dsw-alias-label-secondary);
+  font-variant-numeric: tabular-nums;
+}
